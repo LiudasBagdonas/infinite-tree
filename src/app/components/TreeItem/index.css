@@ -1,0 +1,8 @@
+.subcategory-margin--1 {
+    margin-left: 20px;
+}
+.name-price-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
