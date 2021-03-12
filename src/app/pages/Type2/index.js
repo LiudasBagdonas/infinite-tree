@@ -59,7 +59,8 @@ function Home() {
         setParent(parent);
         showModal();
     }
-console.log(rootCategories)
+console.log('rootcategories', rootCategories);
+console.log('categories:', categories);
     return (
         <main>
             {modalVisibility &&

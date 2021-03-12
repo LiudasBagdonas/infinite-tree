@@ -17,7 +17,6 @@ function Home() {
     const [parent, setParent] = useState('')
 
 
-    console.log(categories)
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -56,7 +55,6 @@ function Home() {
         setParent(parent);
         showModal();
     }
-console.log(categories)
     return (
         <main>
             {modalVisibility &&
