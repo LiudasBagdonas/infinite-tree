@@ -5,12 +5,14 @@ header {
     align-items: center;
 }
 nav {
+    display: flex;
     padding: 0 20px;
 }
 header a {
     text-decoration: none;
     font-weight: bold;
     color: white;
+    margin-right: 20px;
 }
 header a:hover {
     color: #999;

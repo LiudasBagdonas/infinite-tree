@@ -8,7 +8,7 @@ function TreeItem({ name, categories, price, id, root, totalPrice, event }) {
     // const totalPrice = countValues(categories, prices)
 
 
-    console.log(totalPrice)
+    // console.log(totalPrice)
     return (
         <>
             <div className="subcategory-margin--1">

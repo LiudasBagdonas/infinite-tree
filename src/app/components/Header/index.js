@@ -7,7 +7,10 @@ function Header() {
         <header>
             <nav>
                 <NavLink to="/">
-                    <p>Home</p>
+                    <p>Type 1</p>
+                </NavLink>
+                <NavLink to="/type2">
+                    <p>Type 2</p>
                 </NavLink>
             </nav>
         </header>
