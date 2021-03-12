@@ -6,9 +6,9 @@ function Header() {
     return (
         <header>
             <nav>
-                <NavLink to="/">
+                {/* <NavLink to="/">
                     <p>Type 1</p>
-                </NavLink>
+                </NavLink> */}
                 <NavLink to="/type2">
                     <p>Type 2</p>
                 </NavLink>

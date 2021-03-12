@@ -3,13 +3,12 @@ import { useState } from 'react';
 import TreeItem2 from '../../components/TreeItem2';
 import idGenerator from '../../functions/idGenerator';
 import addChild from '../../functions/addChild';
-import updateTotalPrice from '../../functions/updateTotalPrice';
+import calcTotalPrice from '../../functions/calcTotalPrice';
 
 
 function Home() {
 
     const [modalVisibility, setModalVisibility] = useState(false);
-    const [rootCategories, setRootCategories] = useState([])
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('')
     const [error, setError] = useState('')
@@ -29,13 +28,12 @@ function Home() {
                 id: idGenerator(), root: root, parent: parent, totalPrice: price
             };
 
-            if(newNode.root === "") {
-                setRootCategories([...rootCategories, newNode])
-            } else {
-                setCategories([...categories, newNode])
-            }
+            const newCategories = calcTotalPrice(categories, newNode);
+            console.log(newCategories)
+            setCategories(newCategories);
 
-           
+            // setCategories([...categories, newNode])
+
             setModalVisibility(false);
             setRoot('');
             setPrice(0);
@@ -59,8 +57,7 @@ function Home() {
         setParent(parent);
         showModal();
     }
-console.log('rootcategories', rootCategories);
-console.log('categories:', categories);
+    console.log('categories:', categories);
     return (
         <main>
             {modalVisibility &&
@@ -80,12 +77,12 @@ console.log('categories:', categories);
             }
             <p onClick={() => showModal('category')} className="create-category-button">+ Category</p>
             <hr />
-                {rootCategories.map((item, index) => 
-                
-                <TreeItem2 key={index} categories={categories} event={addSubcategory} item={item} /> 
-                
-                )}
-                
+            {categories.map((item, index) =>
+                item.root === "" ?
+                    <TreeItem2 key={index} categories={categories} event={addSubcategory} item={item} totalPrice={parseInt(item.price)} />
+                    : ''
+            )}
+
         </main>
     );
 }
