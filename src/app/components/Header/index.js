@@ -6,11 +6,8 @@ function Header() {
     return (
         <header>
             <nav>
-                {/* <NavLink to="/">
-                    <p>Type 1</p>
-                </NavLink> */}
-                <NavLink to="/type2">
-                    <p>Type 2</p>
+                <NavLink to="/">
+                    <p>Tree</p>
                 </NavLink>
             </nav>
         </header>

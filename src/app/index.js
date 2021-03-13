@@ -18,11 +18,11 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Type2 />
           </Route>
 
           <Route exact path="/type2">
-            <Type2 />
+            <Home />
           </Route>
 
         </Switch>

@@ -1,22 +1,18 @@
-function calcTotalPrice(categories, newNode) {
-    const newArray = categories;
+function calcTotalPrice(categories, newNode, totalAmount = 0) {
 
-    if(newNode.parent === "") {
-        return [...categories, newNode]
+    const parent = categories.filter(category => category.id === newNode.parent)
+    const fullPrice = totalAmount + newNode.price
+
+    if (parent.length) {
+
+        parent[0].totalPrice += fullPrice;
+
+        if (parent[0].parent) {
+            calcTotalPrice(categories, { ...parent[0] }, parseFloat(fullPrice.toFixed(2)))
+        }
+
     }
 
-    return newArray.map((category) => {
-        if(category.id !== newNode.parent) {
-            return newArray.push(category)
-        }
-        if(category.id === newNode.parent) {
-            // newArray.push(category)
-            return calcTotalPrice(newArray, category)
-        }
-        if(category.parent === "") {
-            return newArray;
-        }
-        return newArray
-    })
+    return [...categories, newNode]
 }
 export default calcTotalPrice;
