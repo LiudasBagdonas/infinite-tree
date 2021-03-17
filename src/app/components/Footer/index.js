@@ -5,7 +5,7 @@ function Footer() {
     return (
         <footer>
             <p>
-            © 2020. Liudas Bagdonas, all rights reserved.
+            © {new Date().getFullYear()} Liudas Bagdonas. <a href="https://github.com/LiudasBagdonas/infinite-tree"target="_blank" className="gitHub-link">https://github.com/LiudasBagdonas/infinite-tree.git</a>
             </p>
         </footer>
     );

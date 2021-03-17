@@ -7,7 +7,7 @@ function calculatePriceAfterRemoval(categories, newNode, totalPrice = 0) {
         parent[0].totalPrice -= totalPrice;
 
         if (parent[0].parent) {
-            calculatePriceAfterRemoval(categories, { ...parent[0] }, parseFloat(totalPrice.toFixed(2)))
+            calculatePriceAfterRemoval(categories, { ...parent[0] }, totalPrice)
         }
 
     }

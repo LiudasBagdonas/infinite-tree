@@ -1,28 +1,66 @@
 import './index.css';
-import updateTotalPrice from '../../functions/updateTotalPrice';
+import { useState } from 'react';
+import calculatePriceAfterRemoval from '../../functions/calculatePriceAfterRemoval';
 
-function TreeItem({ name, categories, price, id, root, totalPrice, event }) {
-
-    const hasChildren = !!(categories && categories.length);
-    const prices = 0;
-    // const totalPrice = countValues(categories, prices)
+function TreeItem({ categories, setCategories, event, item }) {
 
 
-    // console.log(totalPrice)
+    const [showChildren, setShowChildren] = useState(false)
+    const children = categories.filter(element => element.parent === item.id)
+
+    const removeNode = (categories, item) => {
+        let newArray = categories.filter(category => category.id !== item.id)
+        let removedNodeParent = newArray.filter(category => category.id === item.parent)
+        const removableChildren = newArray.filter(category => category.parent === item.id)
+
+        if (removedNodeParent.length) {
+
+            newArray = calculatePriceAfterRemoval(newArray, item, item.totalPrice)
+        }
+
+        if (removableChildren.length) {
+
+            return removableChildren.map((child) => {
+                newArray = newArray.filter(item => item.id !== child.id)
+                return removeNode(newArray, child)
+            })
+        }
+        localStorage.setItem('tree', JSON.stringify(newArray))
+        setCategories(newArray)
+    }
+
+    const addCategoryHandler = (item) => {
+        event(item)
+        setShowChildren(true)
+    }
+
     return (
         <>
-            <div className="subcategory-margin--1">
+            <div className="root-category-box">
                 <div className="name-price-box">
-                    <p>{name}</p>
-                    {/* Print item price or button */}
-                    {price !== 0 ?
-                        <p className="category-price">{price}€</p> :
-                        <p className="category-button"
-                            onClick={() => event(root, id)}>+</p>}
-                    <p>{totalPrice}</p>
+                    {item.price ?
+                        <>
+                            <p onClick={() => removeNode(categories, item)} className="remove-button only-remove-button">-</p>
+                        </>
+                        :
+                        <>
+                            <p className="add-button" onClick={() => addCategoryHandler(item.id)}>+</p>
+                            <p onClick={() => removeNode(categories, item)} className="remove-button">-</p>
+                        </>
+                    }
+                    <div className={`tree-arrow-box rotate--${!!(showChildren && children.length) && 'true'}`}>
+                        <div className={`tree-arrow-sub-box`}></div>
+                    </div>
+                    <p onClick={() => setShowChildren(!showChildren)}
+                        className={`category-name root-category--${item.parent === "" && 'true'} 
+                        ${item.price && 'category-with-price'}`} >{item.name}</p>
+
+                    {!!(item.price) && <p className="category-price">Price: {Number(item.price).toFixed(2)}€</p>
+                    }
+                    {!!(children.length) && <p className="category-total-price">Total: {Number(item.totalPrice).toFixed(2)}€</p>}
                 </div>
-                {hasChildren && categories.map((item, index) => (
-                    <TreeItem key={index} {...item} event={event} root={root} />
+                {!!(children.length && showChildren) && children.map((item, index) => (
+                    <TreeItem key={index} categories={categories} setCategories={setCategories} event={event} item={item} />
                 ))}
             </div>
         </>
