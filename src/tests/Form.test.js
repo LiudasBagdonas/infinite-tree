@@ -44,6 +44,13 @@ test('Modal Form Submition', () => {
   fireEvent.click(getByText("+"))
   expect(container.querySelector("form")).toBeInTheDocument();
 
+  expect(getByLabelText("Name:")).toBeInTheDocument();
+  expect(getByText("Add Price?")).toBeInTheDocument();
+  expect(container.querySelector("button")).toBeInTheDocument();
+
+  fireEvent.click(getByText("Add Price?"))
+  expect(getByLabelText("Price:")).toBeInTheDocument();
+
   fireEvent.change(getByLabelText("Name:"), { target: { value: 'Item 2' } })
   fireEvent.change(getByLabelText("Price:"), { target: { value: 1.95 } })
   fireEvent.click(container.querySelector("button"))

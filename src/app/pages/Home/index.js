@@ -42,6 +42,7 @@ function Home() {
 
 
             setModalVisibility(false);
+            setPriceInputVisibility(false);
             setParent('')
             setPrice(0);
             setPriceInputError('')
