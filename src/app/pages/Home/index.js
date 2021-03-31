@@ -77,7 +77,7 @@ function Home() {
                     <form className="category-form" onSubmit={(e) => onSubmit(e)}>
                         <label className={`label ${nameInputError !== '' ? 'error-margin' : ''}`}>
                             Name:
-                            <input type='text' onChange={(e) => setCategory(e.target.value)} placeholder="Category name" required="required"></input>
+                            <input autoFocus type='text' onChange={(e) => setCategory(e.target.value)} placeholder="Category name" required="required"></input>
                         </label>
                         {nameInputError !== '' ? <p className="error-message">{nameInputError}</p> : ''}
                         {!priceInputVisibility && <p className="add-price-button" onClick={() => setPriceInputVisibility(true)}>Add Price?</p>}
@@ -85,7 +85,7 @@ function Home() {
                             priceInputVisibility && <>
                                 <label className={`label ${priceInputError !== '' ? 'error-margin' : ''}`}>
                                     Price:
-                                    <input min="0.00" step="0.01" maxLength="10" type='number'
+                                    <input autoFocus min="0.00" step="0.01" maxLength="10" type='number'
                                         onChange={(e) => setPrice(e.target.value)} placeholder="0.00"></input>
                                 </label>
                                 {priceInputError !== '' ? <p className="error-message">{priceInputError}</p> : ''}
